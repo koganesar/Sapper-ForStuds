@@ -25,7 +25,8 @@ namespace Sapper
 
         private void panel1_Resize(object sender, EventArgs e)
         {
-            _fController.ResizeField();
+            if (_fController!=null)
+                _fController.ResizeField();
         }
     }
 }
