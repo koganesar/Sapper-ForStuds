@@ -4,7 +4,7 @@ public enum StateType
     Closed, Opened, Marked
 }
 
-public delegate void ChangeStateDelegate(CellView cell);
+public delegate void ChangeStateDelegate(StateType prevValue, CellView cell);
 public delegate void StartDelegate();
 
 public class CellView : Control
@@ -18,6 +18,7 @@ public class CellView : Control
     public int Col => _col;
     private bool _content => _f[_row, _col];
     private StateType _state = StateType.Closed;
+    private FieldController _fieldController;
 
     public StateType State
     {
@@ -30,11 +31,11 @@ public class CellView : Control
                 {
                     if (_state != StateType.Opened)
                     {
+                        var prevState = _state;
                         _state = value;
                         Refresh();
+                        StateChanged(prevState, this);
                     }
-
-                    StateChanged(this);
                 }
             }
         }
@@ -42,11 +43,12 @@ public class CellView : Control
 
     public event ChangeStateDelegate StateChanged;
     public event StartDelegate Start;
-    public CellView(Field f, int row, int col)
+    public CellView(Field f, int row, int col, FieldController fieldController)
     {
         _f = f;
         _row = row;
         _col = col;
+        _fieldController = fieldController;
         firstClick = true;
     }
 
@@ -140,6 +142,14 @@ public class CellView : Control
             State = StateType.Opened;
         if (e.Button == MouseButtons.Right)
         {
+            if (State == StateType.Opened)
+            {
+                var neighbours = _fieldController.GetNeghbours(this);
+                var markedCount = neighbours.Count(n => n.State == StateType.Marked);
+                var minesCount = _f.GetNeighboursMineCount(_row, _col);
+                if(markedCount == minesCount)
+                    _fieldController.GetNeghbours(this).ForEach(neighbour => neighbour.State = StateType.Opened);
+            }
             if (State == StateType.Marked)
                 State = StateType.Closed;
             else if (State == StateType.Closed)

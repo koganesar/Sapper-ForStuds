@@ -51,8 +51,14 @@ namespace Sapper
         {
             for (int i = 0; i < MineCount; i++)
             {
-                var mr = _r.Next(Rows);
-                var mc = _r.Next(Cols);
+                int mr;
+                int mc;
+                do
+                {
+                    mr = _r.Next(Rows);
+                    mc = _r.Next(Cols);
+                } while (_mineField[mr, mc]);
+
                 _mineField[mr, mc] = true;
             }
         }

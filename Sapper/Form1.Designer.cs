@@ -28,65 +28,90 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.clockPanel = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            panel1 = new Panel();
+            button1 = new Button();
+            timer1 = new System.Windows.Forms.Timer(components);
+            clockPanel = new Panel();
+            clockLabel = new Label();
+            panel2 = new Panel();
+            minesLabel = new Label();
+            clockPanel.SuspendLayout();
+            panel2.SuspendLayout();
+            SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Location = new System.Drawing.Point(12, 65);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(355, 404);
-            this.panel1.TabIndex = 0;
-            this.panel1.Resize += new System.EventHandler(this.panel1_Resize);
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.Location = new Point(12, 65);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(355, 404);
+            panel1.TabIndex = 0;
+            panel1.Resize += panel1_Resize;
             // 
             // button1
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button1.Location = new System.Drawing.Point(123, 24);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(132, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Новая игра";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            button1.Anchor = AnchorStyles.Top;
+            button1.Location = new Point(123, 24);
+            button1.Name = "button1";
+            button1.Size = new Size(132, 23);
+            button1.TabIndex = 1;
+            button1.Text = "Новая игра";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // clockPanel
             // 
-            this.clockPanel.Location = new System.Drawing.Point(12, 12);
-            this.clockPanel.Name = "clockPanel";
-            this.clockPanel.Size = new System.Drawing.Size(111, 47);
-            this.clockPanel.TabIndex = 2;
+            clockPanel.Controls.Add(clockLabel);
+            clockPanel.Location = new Point(12, 12);
+            clockPanel.Name = "clockPanel";
+            clockPanel.Size = new Size(111, 47);
+            clockPanel.TabIndex = 2;
+            // 
+            // clockLabel
+            // 
+            clockLabel.AutoSize = true;
+            clockLabel.Location = new Point(32, 16);
+            clockLabel.Name = "clockLabel";
+            clockLabel.Size = new Size(40, 15);
+            clockLabel.TabIndex = 4;
+            clockLabel.Text = "00 : 00";
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.Location = new System.Drawing.Point(256, 12);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(111, 47);
-            this.panel2.TabIndex = 3;
+            panel2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            panel2.Controls.Add(minesLabel);
+            panel2.Location = new Point(256, 12);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(111, 47);
+            panel2.TabIndex = 3;
+            // 
+            // minesLabel
+            // 
+            minesLabel.AutoSize = true;
+            minesLabel.Location = new Point(36, 20);
+            minesLabel.Name = "minesLabel";
+            minesLabel.Size = new Size(38, 15);
+            minesLabel.TabIndex = 5;
+            minesLabel.Text = "label1";
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(379, 481);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.clockPanel);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.panel1);
-            this.MinimumSize = new System.Drawing.Size(395, 520);
-            this.Name = "MainForm";
-            this.Text = "Сапёр";
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(379, 481);
+            Controls.Add(panel2);
+            Controls.Add(clockPanel);
+            Controls.Add(button1);
+            Controls.Add(panel1);
+            MinimumSize = new Size(395, 520);
+            Name = "MainForm";
+            Text = "Сапёр";
+            clockPanel.ResumeLayout(false);
+            clockPanel.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
@@ -96,5 +121,7 @@
         private System.Windows.Forms.Timer timer1;
         private Panel clockPanel;
         private Panel panel2;
+        private Label clockLabel;
+        private Label minesLabel;
     }
 }
